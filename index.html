@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Basic-Internal & Enternal</title>
+</head>
+
+<body>
+    <div>
+        <h2>JavaScript Basic-Internal & Enternal</h2>
+    </div>
+</body>
+<!-- =======Internal========== -->
+<script>
+    //print
+    console.log("How are you");
+
+    alert("How are you");
+    confirm("I'm fine");
+
+    // by using following methods we can select DOM elements to be changed
+    // document.getElementById("");   we can select unique elements by id
+    // document.getElementsByClassName(""); select element byusing classes selector(HTML Collector)
+    // document.getElementsByName(""); select element by elements name atribute value (Node Collection)
+    // document.getElementsByTagName(""); select elements by elements name (HTML Collection)
+    // document.querySelector(""); select only one elements from the matchines
+
+    // remove elements
+    document.getElementById("#hID").remove();
+
+    // getting text
+    document.getElementsByName("headingClasses")[0].innerText;
+
+    // changing text
+    document.getElementsByName("headingClasses")[0].innerText="Text Changed";
+
+    // changing style
+    document.getElementsByName("headingClasses")[0].style.color="Green";
+
+    // how to get src(attr) values
+    // getAttribute(param1)
+    // setAttribute(param1,param2)
+
+    // how to get a value from text field
+    // document.querySelector("input").value="C001";  setting value
+    // document.querySelector("input").value"  getting values
+
+    // how to write an event for a buttom 
+    // document.querySelector("input").addEventListener('click',function()){
+    //     alert("How are you")
+    // }
+
+    // get the text field value and set is to the image source
+    // document.querySelector("button").addEventListener('click',function(){
+    //     // document.querySelector("input").value;
+    //     document.querySelector("img").setAttribute("src",document.querySelector("input").value);
+    // });
+
+    // display typed text on the h1 while typing
+    document.querySelector("#type").addEventListener("keyup",function(){
+        document.querySelector("#type").value; // return typed value in the text field
+
+        console.log(document.querySelector("#type").value);
+    });
+</script>
+
+<!-- =======External======== -->
+<script src="script.js"></script>
+
+</html>

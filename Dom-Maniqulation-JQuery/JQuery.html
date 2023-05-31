@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JQuery</title>
+</head>
+<body>
+    <h1>JQuery..</h1>
+    <h1>JQuery..Hello</h1>
+    <h2>what is JQuery and how it's work</h2>
+    <p id="para">Lorem ipsum, dolor sit amet consectetur adipisicing elit. At quam quae cum accusamus perspiciatis vel nulla sapiente architecto tempore suscipit distinctio reprehenderit, accusantium quidem quo.</p>
+    
+    <input type="text" placeholder="Something" id="txtInput">
+    <button id="up">Up</button>
+    <button id="down">Down</button>
+    <ul class="list">
+        <li>IJSE</li>
+        <li>GDSE</li>
+        <li>CMJD</li>
+        <li>RMAD</li>
+    </ul>
+
+    <script src="Assest/jquery-3.7.0.min.js"></script>
+    <script>
+        // document.querySelector("h1").style.color='red';
+        // $('h1').css('color','red');
+
+        //change the selector
+        // var RS =jQuery.noConflict();
+
+        // $() //not recognise
+
+        // RS('h2').css('color','green');
+
+        // what we can put inside jquery selector
+        // $("#para").css("font-size",'30px'); //id
+        // $(".list").css('color','red'); //class
+        // $('[id]').css('border','2px solid red') //attribute
+        // $("li:first-child").css('color','green'); //pseudo class 
+
+        // css combinaters
+        // $("body h1").css('color','red'); //descedent combinator
+        // $("ul>li").css('font-size','30px'); //child cobinator
+        // $('h2+p').css('color','green'); //adjacent combinator
+        // $("h1~h2").css('border','2px solid red'); // general siblings
+        
+        //grouping selector
+        // $('h1,h2').css('color',"red");
+
+        // remove
+        // $('h1').remove();
+
+        // getting text
+        // $('h1').eq(0).text();
+
+        //get the text element
+        // $('#firstH1').text();
+
+        //set the text element
+        // $('#firstH1').text("Institute of SE");
+
+        //change the style
+        // $("li").css('color',"red");
+        // $("li").css('font-size','30px');
+
+        //get value for text file
+        //$('input').val();
+        
+        //set value for text file
+        //$('input').val("IJSE ");
+
+        //get img
+        //$('img').attr('src');
+
+        //set img
+        //$('img').attr('src','https://ijse.lk/images/logos/ijse.png');
+
+        //set button click event
+        // $('button').click(function(){
+        //     alert("Hello")
+        // });
+
+        //adding input in list down
+        // $('ul').append('<li>A</li>');
+
+        //adding input in list up
+        // $('ul').prepend('<li>B</li>');
+
+        //task
+        $("#up").click(function(){
+            //$('#txtInput').val();
+            $('ul').prepend('<li>'+$("#txtInput").val()+'</li>');
+        });
+        $("#down").click(function(){
+            //$('#txtInput').val();
+            $('ul').append('<li>'+$("#txtInput").val()+'</li>');
+        });
+
+    </script>
+</body>
+</html>

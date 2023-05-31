@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>DOM manipulation part Two</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+        #loader {
+            height: 100px;
+            background: url("img/image.gif");
+            background-position: center;
+            background-size: cover;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="row mt-5">
+        <div class="col-1">
+            <h1 id="h1">0</h1>
+        </div>
+        <div id="loader" class="col-2">
+
+        </div>
+    </div>
+    <button class="btn btn-danger" id="btn">Start</button>
+
+    <script>
+
+        document.getElementById("btn").addEventListener('click', function () {
+            
+            
+
+        
+
+            var i = 1;
+            function myLoop() {
+                setTimeout(function () {
+
+                    document.getElementById("h1").innerText = i;
+
+                    i++;
+                    if (i < 100) {
+                        myLoop();
+                    }
+                }, 1000)
+            }
+
+            myLoop();
+
+        });
+
+
+    </script>
+
+</body>
+
+</html>
