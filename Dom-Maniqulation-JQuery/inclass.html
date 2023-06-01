@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1 class="display">Hello There How Are You.?</h1>
+    <input id="txtOne" name="txtContent" type="text" placeholder="Input Something You Like" class="form-control w-25">
+    <button id="btn1" class="btn btn-danger mt-1">Change Text</button>
+
+    <h1 id="color" class="mt-5">Change My Colors</h1>
+
+    <img id="imageOne" src="https://ijse.lk/images/logos/ijse.png" class="w-25 mt-5" alt="My Image">
+    <input type="text" id="txtUrl" placeholder="" class="form-control w-25">
+    <button id="btn2" class="btn btn-danger mt-1 mb-5">Set Image</button>
+    <p  id="para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis hic inventore nihil quo fugit repellat est sapiente voluptas quidem veniam. Sapiente commodi quos asperiores accusantium nam doloremque excepturi. Voluptatibus, doloremque.</p>
+
+    <input type="text" id="txtTask" placeholder="Add Task" class="form-control w-25">
+    <button id="btn3" class="btn btn-danger mt-1">Set Task</button>
+    <ol id="orderedList">
+        <li>Task One</li>
+    </ol>
+    <ul class="list">
+        <li>IJSE</li>
+        <li>GDSE</li>
+        <li>CMJD</li>
+        <li>RMAD</li>
+    </ul>
+
+    <script src="Assest/jquery-3.7.0.min.js"></script>
+
+    <script>
+        //$("h1").css('color',"red");
+        // $("p").css('font-size','20px');
+    </script>
+
+    //class selectors
+    //01. id                  $("#para").css("font-size",'30px');  
+    //02. class               $(".list").css('color','red');
+    //03. attribute           $('[id]').css('border','2px solid red')
+    //04. universal           $('*').css('color','red'); 
+    //05. type                $("h1").css('color',"red");
+    //06. pesudo class        $("li:first-child").css('color','green');
+    //07. pesudo element      $("p").css('font-size','20px'); 
+    //08. grouping selector   $("selectot1, selector2, selector3").css('font-size','20px');  
+    //9. css combinators        
+            //01. descedent combinator        $("body h1").css('color','red');
+            //02. child cobinator             $("ul>li").css('font-size','30px'); 
+            //03. adjacent combinator         $('h2+p').css('color','green'); 
+            //04. general siblings            $("h1~h2").css('border','2px solid red');  
+
+
+</body>
+</html>
