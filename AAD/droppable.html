@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="assest/jquery-ui.min.css">
+    <style>
+        #drag {
+            width: 150px;
+            height: 150px;
+            background: red;
+            border-radius: 100%;
+        }
+
+        #drop {
+            width: 250px;
+            height: 250px;
+            background: yellow;
+            border-radius: 100%;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="drop"></div>
+    <div id="drag"></div>
+
+    <script src="assest/jquery-3.7.0.min.js"></script>
+    <script src="assest/jquery-ui.min.js"></script>
+    <script>
+
+        $("#drag").draggable();
+        $("#drop").droppable({
+            drop: function (event, ui) {
+                alert("Droped!");
+                $(this).css('background', 'pink');
+            }
+        });
+    </script>
+</body>
+
+</html>
