@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>JS with OOP</title>
+</head>
+
+<body>
+    <h1>OOP with JS</h1>
+
+    <script>
+        //Create a js literal base object for company  including data
+        //Company name
+        //Company address
+        //Company TP
+        //Company foundYear
+        //Company monthlyIncome
+
+        //Please make sure to convert all the properties to private
+        //You know js properties can delete at any time. so I want to stop deleting all the  properties
+        //I want to foundYear property value to final state, which means the value which assigned for the found year cannot be changed
+        //Monthly income property should not have a direct value, so the value should later assign
+
+        //Please note, that you are only allowed to use literal base objects for this
+
+        //named value container
+        let company = {
+            name: "IJSE",
+            address: "Galle",
+            tp: "077123456",
+            foundYear: "2004",
+            // monthlyIncome: 100
+        }
+
+        company.id;
+
+        //How to get the public keys of an object
+        //first method
+        Object.keys(company);
+
+        //second method
+        // for(var i in company){
+        //     console.log(i);
+        // }
+
+
+        //can we delete a property of an object
+        // delete company.name; //yes
+
+
+        //how to change a value of an object property
+        // company.foundYear="2005";
+
+
+        //Property Descriptors
+        //Enumerable
+        //Configurable
+        //Writable
+        // value
+
+        //So how to check those property descriptors for a object property
+        // Object.getOwnPropertyDescriptor(); // here we can use this method
+
+        Object.getOwnPropertyDescriptor(company, 'address'); //will return the address property descriptors
+        Object.getOwnPropertyDescriptor(company, 'name');//will return the name property descriptors
+        // {
+        //     configurable:true,
+        //     enumerable:true,
+        //     value:"IJSE",
+        //     writable:true
+        // }
+
+        //WRITABLE
+        //So can we change these descriptors as we want
+        //yes this is how to do it
+        Object.defineProperty(company, 'name', {
+            writable: false
+        });
+        Object.getOwnPropertyDescriptor(company, 'name');
+        // {
+        //     configurable:true,
+        //     enumerable:true,
+        //     value:"IJSE",
+        //     writable:false //now this is false
+        // }
+
+        //So what will happen with this to name.?
+        company.name = "GDSE";
+        company.name;//will print IJSE
+        //Ok now we can see name value is final. we can't change it again
+
+        //what if we want to reverse this case again back to normal. can we do it.?
+        Object.defineProperty(company, 'name', {
+            writable: true
+        });
+        //yes this is fine no problem at all
+        //But still the name property is visible
+        //Still name property can delete
+
+        //So how to manage them.?
+
+
+        //ENUMERABLE
+        //Remove the property from the countable state, and add some kind of hiding
+        Object.defineProperty(company, 'name', {
+            enumerable: false
+        });
+
+        Object.getOwnPropertyDescriptor(company, "name");
+        // {
+        //     configurable:true,
+        //     enumerable:false,//now this is false
+        //     value:"IJSE",
+        //     writable:true
+        // }
+
+        Object.keys(company);
+        //['address', 'tp', 'foundYear', 'monthlyIncome'] // no name key
+
+        for (var i in company) {
+            console.log(i);
+        }
+        // VM1251:2 address
+        // VM1251:2 tp
+        // VM1251:2 foundYear
+        // VM1251:2 monthlyIncome
+        //here also no name key
+
+
+        //but if you know the property key name then you can still access it
+        company.name
+        //'IJSE'
+
+        //can we delete name property with enumerable false; //yes
+        //can we change the value = yes (unless writable is true we can do it)
+        //enumerable is only concerning about the properties countable state
+
+        //can we change it to normal state again.?
+        Object.defineProperty(company, 'name', {
+            enumerable: true
+        });
+
+        Object.getOwnPropertyDescriptor(company, "name");
+        // {
+        //     configurable:true,
+        //     enumerable:true,
+        //     value:"IJSE",
+        //     writable:true
+        // }
+        //yes we can
+
+
+        // CONFIGURABLE
+        //By using this property we can stop changing configurations of a property
+        // Object.defineProperty(company, 'name', {
+        //     configurable: false
+        // });
+
+        // Object.getOwnPropertyDescriptor(company, "name");
+        //{value: 'IJSE', writable: true, enumerable: true, configurable: false}
+
+        // delete company.name
+        //false ;;// now we cant delete after assigning false to configurable
+
+        // Object.getOwnPropertyDescriptor(company, "name");
+        //{value: 'IJSE', writable: true, enumerable: true, configurable: false}
+
+        //Can we chanage any other properties like enumerable.?
+        // Object.defineProperty(company, 'name', {
+        //     enumerable: false//with enumerable no
+        // });
+        //VM1428:1 Uncaught TypeError: Cannot redefine property: name
+
+        // Object.getOwnPropertyDescriptor(company, "name");
+        //{value: 'IJSE', writable: true, enumerable: true, configurable: false}configurable: falseenumerable: truevalue: "IJSE"writable: true[[Prototype]]: Object
+
+        //what about writable
+        //yes. if the writable is true you have only one chance to set it to false
+        //but after that you will not allow to do anything
+        // Object.defineProperty(company, 'name', {
+        //     writable: false
+        // });
+        //{name: 'IJSE', address: 'Galle', tp: '077123456', foundYear: '2004', monthlyIncome: 100}
+
+        // Object.getOwnPropertyDescriptor(company, "name");
+        //{value: 'IJSE', writable: false, enumerable: true, configurable: false}
+
+
+        //so if we try to change writable back to true after configuration false
+        //there is no chance of doing it
+        // Object.defineProperty(company, 'name', {
+        //     writable: true
+        // });
+        // VM1483:1 Uncaught TypeError: Cannot redefine property: name
+
+
+        // Object.getOwnPropertyDescriptor(company, "name");
+        //{value: 'IJSE', writable: false, enumerable: true, configurable: false}
+
+
+        //So how to achieve the last task
+        //How to define a property without a value
+
+        //There are two types of properties in JS
+        //Data properties
+        //(if there is a direct value assigned for
+        // a property it is called as a Data Property)
+
+        //Accessor Properties
+        //(if there is no value directly assigned to a
+        // property and also if the value is assigned later
+        // by using getters and setters they are called
+        // as accessor properties)
+
+        //monthlyIncome
+        //this property hasn't a direct value
+        //so if we want to define this we have to use the accessor property method
+        //this is how to define an accessor property
+        Object.defineProperty(company, 'monthlyIncome', {
+            get() {
+                return monthlyIncome;
+            },
+            set(v) {
+                monthlyIncome = v;
+            }
+        });
+
+        //let's check propery is availble
+        Object.keys(company);
+        //['name', 'address', 'tp', 'foundYear']
+        //but not visible here
+
+        //so let's check why using the property descriptors
+        Object.getOwnPropertyDescriptor(company, "monthlyIncome");
+        //{
+        // enumerable: false, //this is false in default
+        // configurable: false,
+        // get: ƒ,
+        // set: ƒ
+        // }
+        //so here is the issue. enumerable is false, so it will hide from countable state
+        //which means accessor properties are differ from data properties
+        //they have only four property descriptors
+        //{
+        // enumerable: false, //this is false in default
+        // configurable: false, //this is false in default
+        // get: ƒ,
+        // set: ƒ
+        // }
+        //here we have no writable and value descriptors because accessors don't have
+        //value, so if there is no value no requirement for writable also
+
+        //so let's try to access the accessor property
+        company.monthlyIncome; //error
+
+        //you should first assign a value before requesting it back
+        company.monthlyIncome = 100000;// this is how to invoke the setter method of an accessor property
+
+        company.monthlyIncome;//this is how to invoke the getter method of an accessor property
+
+        Object.getOwnPropertyDescriptor(company, "monthlyIncome");
+        // {enumerable: false, configurable: false, get: ƒ, set: ƒ}
+
+
+        //Let's crete another accessor property changing the default values of
+        // writable and enumerable
+        Object.defineProperty(company, 'annualIncome', {
+            get() {
+                return annualIncome;
+            },
+            set(v) {
+                annualIncome = v;
+            },
+            configurable: true,
+            enumerable: true,
+            //writable:true // this will generate an error because both writable and
+            //getter, setter are not allowed
+        });
+
+
+        company.anualIncome = 300;
+        // 300
+
+        company.annualIncome;
+        // 300
+
+        Object.getOwnPropertyDescriptor(company, 'annualIncome');
+        // {enumerable: true, configurable: true, get: ƒ, set: ƒ}
+
+        Object.keys(company);
+        // ['name', 'address', 'tp', 'foundYear', 'annualIncome']
+
+
+        //So this approach is horrible right.?
+        //That's why js introduce Function to resolve this complexity
+        //to some extent.
+
+
+        function Company() {
+            this.name = "IJSE";
+            this.address = 'Galle';
+            this.tp = '0773572070';
+            this.foundYear = '2000';
+            this.monthlyIncome = 500;
+        }
+
+        let c = new Company();
+
+
+        function getID() {
+            return this.id;
+        }
+        function setID(id) {
+            this.id = id;
+        }
+
+        function getName() {
+            return this.name;
+        }
+        function setName(name) {
+            this.name = name;
+        }
+
+        function getAddress() {
+            return this.address;
+        }
+        function setAddress(address) {
+            this.address = address;
+        }
+
+        const Company = new Company("IJSE","Galle","0112345678","2000","450000");
+
+        function Company (id, name, address, salary){
+            let __id=id;
+            let __name=name;
+            let __address=address;
+            let __salary=salary;
+        }
+
+        this.getID=function(){
+            return__id;
+        }
+        this.setID=function(id){
+            __id=id;
+        }
+        this.getName=function(){
+            return__name;
+        }
+        this.setName=function(name){
+            __name=name;
+        }
+        this.getAddress=function(){
+            return__address;
+        }
+        this.setAddress=function(address){
+            __address=address;
+        }
+        this.getSalary=function(){
+            return__salary;
+        }
+        this.setSalary=function(salary){
+            __salary=salary;
+        }
+
+
+        //java script wala inheritance maintain karanne prototype chane ekk trough.
+        //prototype ekk kiyanne object ekk
+
+        //function ekai eyage prototype ekk link karagnn karagnn special properties tikk thibee
+
+        
+    </script>
+</body>
+
+</html>
